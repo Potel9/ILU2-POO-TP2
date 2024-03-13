@@ -12,10 +12,10 @@ public class BoundaryEmmenager {
 	public void emmenager(String nomVisiteur) {
 		if (controlEmmenager.isHabitant(nomVisiteur)) {
 			System.out.println(
-					"Mais vous êtes déjà un habitant du village !");
+					"Mais vous etes deja un habitant du village !");
 		} else {
 			StringBuilder question = new StringBuilder();
-			question.append("Êtes-vous :\n");
+			question.append("Etes-vous :\n");
 			question.append("1 - un druide.\n");
 			question.append("2 - un gaulois.\n");
 			int choixUtilisateur = -1;
@@ -27,7 +27,8 @@ public class BoundaryEmmenager {
 					break;
 
 				case 2:
-					//TODO a completer
+					int force = Clavier.entrerEntier("Bienvenue villageois "+ nomVisiteur +"\nQuelle est votre force ?");
+					controlEmmenager.ajouterGaulois(nomVisiteur, force);
 					break;
 
 				default:
@@ -40,6 +41,18 @@ public class BoundaryEmmenager {
 	}
 
 	private void emmenagerDruide(String nomVisiteur) {
-		//TODO a completer
+		StringBuilder question = new StringBuilder();
+		question.append("Bienvenue druide"+ nomVisiteur +"\n"+ "Quel est votre force ?\n"); 
+		int forceDruide = Clavier.entrerEntier(question.toString());
+		int effetPotMin, effetPotMax ;
+		do {
+			 effetPotMin = Clavier.entrerEntier("Quelle est la potion la plus faible que vous produisez ?");
+			 effetPotMax = Clavier.entrerEntier("Quelle est la potion la plus forte que vous produisez ?");
+			 if (effetPotMax<effetPotMin) {
+				 System.out.println("Attention druide, vous vous �tes tromp� entre le minimum et le maximum");
+			 }
+		} while (effetPotMax<effetPotMin);
+		
+		controlEmmenager.ajouterDruide(nomVisiteur, forceDruide, effetPotMin, effetPotMax);
 	}
 }
