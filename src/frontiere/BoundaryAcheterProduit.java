@@ -13,6 +13,10 @@ public class BoundaryAcheterProduit {
 	}
 
 	public void acheterProduit(String nomAcheteur) {
-		// TODO à completer
+		if (controlAcheterProduit.verifIdentite(nomAcheteur)) {
+			System.out.println("Quel produit voulez acheter ?");
+			String produit = scan.next(); 
+			System.out.println(controlAcheterProduit.afficherVendeur(controlAcheterProduit.trouverEtalProduit(produit)));
+		}
 	}
 }
