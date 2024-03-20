@@ -11,10 +11,10 @@ public class ControlTrouverEtalVendeur {
 	}
 
 	public Etal trouverEtalVendeur(String nomVendeur) {
-		if (village.trouverHabitant(nomVendeur)!=null){
-		return village.rechercherEtal(village.trouverHabitant(nomVendeur));
-	}
-		else {
-			return null ;
+		if (village.trouverHabitant(nomVendeur) != null) {
+			return village.rechercherEtal(village.trouverHabitant(nomVendeur));
+		} else {
+			return null;
 		}
-}}
+	}
+}
