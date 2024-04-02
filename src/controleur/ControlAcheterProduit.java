@@ -1,33 +1,46 @@
 package controleur;
 
+import frontiere.Clavier;
 import personnages.Gaulois;
+import villagegaulois.Etal;
 import villagegaulois.Village;
 
 public class ControlAcheterProduit {
-	private Village village;
-	private ControlTrouverEtalVendeur controlTrouverEtalVendeur;
-	private ControlVerifierIdentite controlVerifierIdentite;
+    private Village village;
+    private ControlTrouverEtalVendeur controlTrouverEtalVendeur;
+    private ControlVerifierIdentite controlVerifierIdentite;
 
-	public ControlAcheterProduit(ControlVerifierIdentite controlVerifierIdentite,
-			ControlTrouverEtalVendeur controlTrouverEtalVendeur,
-			Village village) {
-		this.village = village;
-		this.controlVerifierIdentite = controlVerifierIdentite;
-		this.controlTrouverEtalVendeur = controlTrouverEtalVendeur;
-	}
+    public ControlAcheterProduit(ControlVerifierIdentite controlVerifierIdentite,
+                                  ControlTrouverEtalVendeur controlTrouverEtalVendeur,
+                                  Village village) {
+        this.village = village;
+        this.controlVerifierIdentite = controlVerifierIdentite;
+        this.controlTrouverEtalVendeur = controlTrouverEtalVendeur;
+    }
 
-	public boolean verifIdentite(String nom) {
-		return controlVerifierIdentite.verifierIdentite(nom);
-	}
+    public boolean verifIdentite(String nom) {
+        return controlVerifierIdentite.verifierIdentite(nom);
+    }
 
-	public Gaulois[] trouverEtalProduit(String produit) {
-			return village.rechercherVendeursProduit(produit);
-	}
-	public StringBuilder afficherVendeur(Gaulois[] listeVendeur) {
-		StringBuilder chaine = new StringBuilder();
-		for (int i = 0 ; i<listeVendeur.length;i++) {
-			chaine.append(i +"- "+listeVendeur[i].getNom()+"\n");
-		}
-		return chaine ;
-	}
+    public Gaulois[] trouverEtalProduit(String produit) {
+        return village.rechercherVendeursProduit(produit);
+    }
+    public Etal trouverEtalVendeurs(String vendeur ) {
+    	return village.rechercherEtal(village.trouverHabitant(vendeur));
+    	
+    	
+    }
+    
+    public int acheterProduit(String vendeur, int quantite) {
+            Etal vendeurs = trouverEtalVendeurs(vendeur);int achat = 0;
+            if (vendeurs != null ) {
+            	 achat = vendeurs.acheterProduit(quantite);
+            } else {
+                System.out.println("Aucun vendeur trouvé pour ce produit.");
+                
+            }
+        return achat ;
+        
+    }
+
 }
